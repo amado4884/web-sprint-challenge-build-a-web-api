@@ -20,10 +20,11 @@ module.exports = {
   production: {
     client: "postgresql",
     useNullAsDefault: true,
-    connection: {
+    connection: process.env.DATABASE_URL || {
       database: process.env.DB_NAME || "lambda",
       user: process.env.DB_USER || "postgres",
       password: process.env.DB_PASSWORD || "postgres",
+      host: process.env.DATABASE_HOST || null,
     },
     pool: {
       afterCreate: (conn, done) => {
